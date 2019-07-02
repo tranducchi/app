@@ -11,7 +11,7 @@ export default class MainScreen extends Component {
         renderItem={({ item }) =>
           <View style={styles.wrap}>
             <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('ListArticle') }
+            onPress={() => this.props.navigation.navigate('ListArticle', {name:"Chuyên mục nhạc trẻ"})}
             style={styles.cat}>
               <Text style={styles.title}>Nhạc trẻ</Text>
               <Text style={styles.count}>(234 bài)</Text>

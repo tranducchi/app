@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
-import TabNavigator from 'react-native-tab-navigator';
+import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
 import TabNav from './main/TabNav';
 import Header from './header/Main';
 import Drawer from 'react-native-drawer';
@@ -32,7 +31,7 @@ export default class HomeScreen extends Component {
       >
       <View style={styles.wrap}>
         <View style={styles.header}>
-            <Header openDraw={this.openControlPanel}/>
+            <Header openDraw={this.openControlPanel} navigation={this.props.navigation}/>
         </View>
         <View style={styles.main}>
             <TabNav navigation={this.props.navigation} />
@@ -51,6 +50,6 @@ const styles = StyleSheet.create({
     },
     main:{
         flex:9,
-        
+        paddingTop: 20,
     }
 });
