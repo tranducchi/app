@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
         flex:8,
         paddingLeft:20,
         fontSize: 15,
-        color:'white'
+        color:'white',
     },
     cancel:{
         color:"#fff",
