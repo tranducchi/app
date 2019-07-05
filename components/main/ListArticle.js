@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import DataService from '../../service/DataService';
 
 export default class ListArticle extends Component {
+
+  
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.getParam('name'),
+      title: navigation.getParam('item').name,
       headerRight: (
         <TouchableOpacity style={{ paddingRight: 5 }} onPress={() => navigation.navigate('Search')}>
           <Image source={require('../../images/search.png')} style={styles.img} />
@@ -18,7 +21,8 @@ export default class ListArticle extends Component {
     this.state = {
       star: true,
       data: [],
-      current_page: 1
+      current_page: 1,
+      category: props.navigation.getParam('item', null)
     }
   }
 
@@ -48,12 +52,32 @@ export default class ListArticle extends Component {
     });
   }
   componentDidMount() {
+    const { category } = this.state;
+    const listArticle = DataService.getData('Article');
+    const list = listArticle.filter(e => e.cat_id == category.id)
+    this.setState({ data: list })
+    this.getDataOnline();
+  }
+
+
+  getDataOnline(){
     fetch('http://playnhaccu.com/api/getArticles')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        con = responseJson;
+    .then((response) => response.json())
+    .then((responseJson) => {
+        const newResponse = responseJson.map(e => {
+          return {
+            id: e.id,
+            name: e.name,
+            slug: e.slug,
+            description: e.description,
+            body: e.body,
+            cat_id: parseInt(e.cat_id)
+          }
+        })
+        DataService.saveArrayData(newResponse, 'Article');
+        const list = responseJson.filter(e => e.cat_id == this.state.category.id)
         this.setState({
-          data: con
+          data: list
         })
       })
       .catch((error) => {
@@ -67,7 +91,7 @@ export default class ListArticle extends Component {
       <FlatList
         data={this.state.data}
         renderItem={({ item }) =>
-          <TouchableOpacity style={styles.wrap} onPress={() => this.props.navigation.push('DetailScreen')}>
+          <TouchableOpacity style={styles.wrap} onPress={() => this.props.navigation.push('DetailScreen', { item: item})}>
             <View style={styles.left}>
               <Text style={styles.title}>{item.name}</Text>
               <Text style={styles.des}>Có lẽ nào em lại quên đi .....</Text>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableWithoutFeedback, TouchableOpacity,  Image, TextInput, StyleSheet, Keyboard} from 'react-native';
+import { View, Text, TouchableWithoutFeedback, TouchableOpacity,  Image, TextInput, StyleSheet, Keyboard, FlatList} from 'react-native';
+import DataService from '../../service/DataService';
 
 export default class Search extends Component {
     
@@ -10,6 +11,8 @@ export default class Search extends Component {
         super(props);
         this.state = {
             text: '',
+            listData: [],
+            listDataSearch: []
         }
     }
     _clear(){
@@ -35,7 +38,25 @@ export default class Search extends Component {
             )
         }
     }
+
+    componentDidMount(){
+        console.log('Search hahaha:');
+        const listArticle = DataService.getData('Article');
+        this.setState({
+            listData: listArticle,
+            listDataSearch: listArticle
+        })
+    }
+
+    handleFilter(text){
+        const listFilter = this.state.listData.filter(e => e.name.toLowerCase().includes(text.toLowerCase()) );
+        this.setState({
+            listDataSearch: listFilter,
+            text
+        })
+    }
     render() {
+        console.log('List data search:', this.state.listDataSearch);
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <View style={styles.wrap}>
@@ -46,7 +67,7 @@ export default class Search extends Component {
                         style={styles.input}
                         placeholder="Nhập tên bài hát Vd : Lac Troi"
                         placeholderTextColor='#edeaea'
-                        onChangeText={(text) => this.setState({ text })}
+                        onChangeText={(text) => this.handleFilter(text)}
                         value={this.state.text}
                     />
                     {this._check()}
@@ -55,7 +76,17 @@ export default class Search extends Component {
                     Kết quả tìm kiếm : 
                 </Text>
                 <View style={styles.result}>
-                    
+                    <FlatList
+                        data={this.state.listDataSearch}
+                        extraData={this.state.listDataSearch}
+                        renderItem={({ item }) =>
+                        <TouchableOpacity style={styles.wrap}>
+                            <View style={{ height: 40, borderBottomWidth: 1, borderBottomColor: '#CACACA', justifyContent: 'center', paddingLeft: 10}}>
+                                <Text style={styles.title}>{item.name}</Text>
+                            </View>
+                        </TouchableOpacity>
+                        }
+                    />
                 </View>
             </View>
             </TouchableWithoutFeedback>
