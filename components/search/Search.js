@@ -80,7 +80,7 @@ export default class Search extends Component {
                         data={this.state.listDataSearch}
                         extraData={this.state.listDataSearch}
                         renderItem={({ item }) =>
-                        <TouchableOpacity style={styles.wrap}>
+                        <TouchableOpacity style={styles.wrap} onPress={() => this.props.navigation.push('DetailScreen', { item: item, name:item.name,})}>
                             <View style={{ height: 40, borderBottomWidth: 1, borderBottomColor: '#CACACA', justifyContent: 'center', paddingLeft: 10}}>
                                 <Text style={styles.title}>{item.name}</Text>
                             </View>

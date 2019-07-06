@@ -43,16 +43,99 @@ export default class MainScreen extends Component {
       <FlatList
         data={listCategory}
         renderItem={({ item }) =>
-          <View style={styles.wrap}>
-            <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('ListArticle', { item: item })}
-            style={styles.cat}>
-              <Text style={styles.title}>{item.name}</Text>
-              <Text style={styles.count}>(234 bài)</Text>
-              <View style={styles.square}></View>
-              <Image source={require('../../images/nhac-tre.jpg')} style={styles.img} />
-            </TouchableOpacity>
-          </View>
+          {
+            if(item.name=='Nhạc Trẻ'){
+              return (
+                <View style={styles.wrap}>
+                <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('ListArticle', { item: item })}
+                style={styles.cat}>
+                
+                  <Image source={require('../../images/nhac-tre.png')} style={styles.img} />
+                </TouchableOpacity>
+              </View>
+              )
+             
+            }
+            if(item.name=='Nhạc Trung Hoa'){
+              return (
+                <View style={styles.wrap}>
+                <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('ListArticle', { item: item })}
+                style={styles.cat}>
+                  <Image source={require('../../images/nhac-trung-quoc.png')} style={styles.img} />
+                </TouchableOpacity>
+              </View>
+              )
+            }
+            if(item.name=='Nhạc Trữ Tình'){
+              return (
+                <View style={styles.wrap}>
+                <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('ListArticle', { item: item })}
+                style={styles.cat}>
+                  <Image source={require('../../images/nhac-tru-tinh.png')} style={styles.img} />
+                </TouchableOpacity>
+              </View>
+              )
+            }
+            if(item.name=='Dân Ca - Quan Họ'){
+              return (
+                <View style={styles.wrap}>
+                <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('ListArticle', { item: item })}
+                style={styles.cat}>
+                  <Image source={require('../../images/dan-ca.png')} style={styles.img} />
+                </TouchableOpacity>
+              </View>
+              )
+            }
+            if(item.name=='Nhạc Thiếu Nhi'){
+              return (
+                <View style={styles.wrap}>
+                <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('ListArticle', { item: item })}
+                style={styles.cat}>
+                  <Image source={require('../../images/nhac-thieu-nhi.png')} style={styles.img} />
+                </TouchableOpacity>
+              </View>
+              )
+            }
+            if(item.name=='Nhạc Cách Mạng'){
+              return (
+                <View style={styles.wrap}>
+                <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('ListArticle', { item: item })}
+                style={styles.cat}>
+                  <Image source={require('../../images/nhac-cach-mang.png')} style={styles.img} />
+                </TouchableOpacity>
+              </View>
+              )
+            }
+            if(item.name=='Nhạc Nước Ngoài'){
+              return (
+                <View style={styles.wrap}>
+                <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('ListArticle', { item: item })}
+                style={styles.cat}>
+                  <Image source={require('../../images/nhac-nuoc-ngoai.png')} style={styles.img} />
+                </TouchableOpacity>
+              </View>
+              )
+            }
+            if(item.name=='Quê Hương - Đất Nước'){
+              return (
+                <View style={styles.wrap}>
+                <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('ListArticle', { item: item })}
+                style={styles.cat}>
+                  <Image source={require('../../images/que-huong-dat-nuoc.png')} style={styles.img} />
+                </TouchableOpacity>
+              </View>
+              )
+            }
+          }
+        
         }
       />
     );
@@ -72,30 +155,5 @@ const styles = StyleSheet.create({
   img: {
     width: width - 20,
     height: height / 4 + 10,
-  },
-  square:{
-    position:'absolute',
-    width: width - 20,
-    height: height / 4 + 10,
-    top:0,
-    zIndex:1,
-    opacity:0.4,
-    backgroundColor:'black'
-  },
-  title: {
-    fontWeight: 'bold',
-    position:'absolute',
-    top:height/6,
-    left:width/2-45,
-    zIndex:2,
-    fontSize: 20,
-    color:'white'
-  },
-  count:{
-    position:'absolute',
-    top:height/4-15,
-    left:width/2-40,
-    zIndex:2,
-    color:'white'
   }
 });

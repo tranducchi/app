@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import DataService from '../../service/DataService';
-
 export default class ListArticle extends Component {
 
   
@@ -69,7 +68,7 @@ export default class ListArticle extends Component {
             id: e.id,
             name: e.name,
             slug: e.slug,
-            description: e.description,
+            description:e.description,
             body: e.body,
             cat_id: parseInt(e.cat_id)
           }
@@ -87,14 +86,14 @@ export default class ListArticle extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-
       <FlatList
         data={this.state.data}
         renderItem={({ item }) =>
-          <TouchableOpacity style={styles.wrap} onPress={() => this.props.navigation.push('DetailScreen', { item: item})}>
+          <TouchableOpacity style={styles.wrap} onPress={() => this.props.navigation.push('DetailScreen', { item: item, name:item.name})}>
             <View style={styles.left}>
               <Text style={styles.title}>{item.name}</Text>
-              <Text style={styles.des}>Có lẽ nào em lại quên đi .....</Text>
+              <Text style={styles.des} numberOfLines={1}>{item.description}</Text>
+              
             </View>
             <View style={styles.right}>
               {this._star()}
@@ -111,11 +110,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 10,
+    padding:10,
+    paddingRight:25,
     borderBottomColor: 'gray',
     borderBottomWidth: 0.6,
   },
   title: {
+    flex:9,
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -126,8 +127,10 @@ const styles = StyleSheet.create({
     fontStyle: 'italic'
   },
   star: {
+    flex:1,
     width: 20,
     height: 20,
+    
   },
   img: {
     width: 30,

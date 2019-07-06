@@ -1,18 +1,21 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, ScrollView, Dimensions} from 'react-native';
 import HTML from 'react-native-render-html';
-export default class DetailScreen extends React.Component {
 
+export default class DetailScreen extends React.Component {
 
     constructor(props){
       super(props);
       this.state = {
-        item : props.navigation.getParam('item', null)
+        item : props.navigation.getParam('item', null),
       }
+    
     }
 
-    static navigationOptions = {
-      title: 'Chi tiết',
+    static navigationOptions = ({ navigation }) => {
+      return {
+        title: navigation.getParam('name'),
+      };
     };
 
     componentDidMount() {

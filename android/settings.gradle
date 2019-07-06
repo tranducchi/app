@@ -1,4 +1,6 @@
 rootProject.name = 'cac'
+include ':@react-native-community_async-storage'
+project(':@react-native-community_async-storage').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/async-storage/android')
 include ':realm'
 project(':realm').projectDir = new File(rootProject.projectDir, '../node_modules/realm/android')
 include ':react-native-gesture-handler'
@@ -6,6 +8,3 @@ project(':react-native-gesture-handler').projectDir = new File(rootProject.proje
 
 include ':app'
 
-//db
-include ':react-native-sqlite-storage'
-project(':react-native-sqlite-storage').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-sqlite-storage/src/android')
