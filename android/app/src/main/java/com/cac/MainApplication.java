@@ -3,6 +3,7 @@ package com.cac;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import io.realm.react.RealmReactPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -29,7 +30,6 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new AsyncStoragePackage(),
             new RealmReactPackage(),
-          
             new RNGestureHandlerPackage()
       );
     }

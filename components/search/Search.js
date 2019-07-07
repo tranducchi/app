@@ -47,15 +47,30 @@ export default class Search extends Component {
             listDataSearch: listArticle
         })
     }
-
+    slugify(string) {
+        const a = 'àáäâãåăæąçćčđèéėëêęǵḧìíïîįłḿǹńňñòóöôœøṕŕřßśšșťțùúüûǘůűūųẃẍÿýźžż·/_,:;'
+        const b = 'aaaaaaaaacccdeeeeeeghiiiiilmnnnnooooooprrssssttuuuuuuuuuwxyyzzz------'
+        const p = new RegExp(a.split('').join('|'), 'g')
+      
+        return string.toString().toLowerCase()
+          .replace(/\s+/g, '-')
+          .replace(p, c => b.charAt(a.indexOf(c)))
+          .replace(/&/g, '-and-')
+          .replace(/[^\w\-]+/g, '')
+          .replace(/\-\-+/g, '-') 
+          .replace(/^-+/, '')
+          .replace(/-+$/, '') 
+      }
     handleFilter(text){
-        const listFilter = this.state.listData.filter(e => e.name.toLowerCase().includes(text.toLowerCase()) );
+      
+        const listFilter = this.state.listData.filter(e => e.slug.toLowerCase().includes(  this.slugify(text)) );
         this.setState({
             listDataSearch: listFilter,
             text
         })
     }
     render() {
+        const result = this.state.listDataSearch;
         console.log('List data search:', this.state.listDataSearch);
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>

@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
     flex:9,
     fontSize: 16,
     fontWeight: 'bold',
+    color:'#3a3c3f'
   },
   author: {
 
