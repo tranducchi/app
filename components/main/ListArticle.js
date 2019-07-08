@@ -113,13 +113,13 @@ const styles = StyleSheet.create({
     padding:10,
     paddingRight:25,
     borderBottomColor: 'gray',
-    borderBottomWidth: 0.6,
+    borderBottomWidth: 0.4,
   },
   title: {
     flex:9,
     fontSize: 16,
     fontWeight: 'bold',
-    color:'#3a3c3f'
+    color:'#393B3D'
   },
   author: {
 
