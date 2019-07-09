@@ -4,7 +4,7 @@ export default class FavoriteScreen extends Component {
   render() {
     return (
       <View>
-          <Text>Favorite Screen</Text>
+          <Text>Đang cập nhật</Text>
       </View>
     );
   }

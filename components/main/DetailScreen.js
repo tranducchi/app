@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, ScrollView, Dimensions, Slider, TouchableHighlight, Image, Easing,TouchableWithoutFeedback, Animated} from 'react-native';
-
+import KeepAwake from 'react-native-keep-awake';
 import HTML from 'react-native-render-html';
-
+var {height, width} = Dimensions.get('window');
 export default class DetailScreen extends React.Component {
 
     constructor(props){
@@ -12,6 +12,7 @@ export default class DetailScreen extends React.Component {
         speed : 0,
         showSlider: true,
         fun : true,
+        yValue : new Animated.Value(0),
       }
     }
 
@@ -46,22 +47,22 @@ export default class DetailScreen extends React.Component {
           fun:true
         })
       }
-      setTimeout(()=>{
-        this.refs.toEnd.scrollTo({y:10},)
-      },0)
-      
+    this.refs.toEnd.scrollToEnd({duration:3000})
     }
-
     render() {
       const { item, showSlider } = this.state;
       return (   
-      
+        
           <View style={styles.wrap}>
-            <ScrollView ref="toEnd">
+            <ScrollView
+             ref="toEnd"
+              >
             <TouchableHighlight underlayColor="rgba(255, 255, 255, 0)" onPress={this._show.bind(this)}>
-                <HTML tagsStyles={ {p: { fontSize: 17, color:'#3a3c3f' }} } html={item && item.body} imagesMaxWidth={Dimensions.get('window').width} 
+             
+                <HTML tagsStyles={ {p: { fontSize: 17, color:'#3a3c3f' }}} html={item && item.body} imagesMaxWidth={Dimensions.get('window').width} 
                 />
-             </TouchableHighlight>
+                </TouchableHighlight>
+                <KeepAwake />
             </ScrollView>
             <View style={[styles.scroll, { bottom: showSlider ? 10 : -40 } ]}>
               {this.state.fun ? (<TouchableWithoutFeedback  style={styles.fun} onPress={this._fun.bind(this)}>
